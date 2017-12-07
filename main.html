@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html ng-app = "narrativePlaylist" ng-controller="mainController" >
+        <head>
+        	<title>narrative playlist</title>
+        	    <link href="./node_modules/angular-material/angular-material.css" rel="stylesheet" />
+                <script src="./node_modules/angular/angular.js" type="text/javascript" ></script>
+                <script src="./node_modules/angular-resource/angular-resource.js" type="text/javascript" ></script>
+
+                <script src="./node_modules/angular-animate/angular-animate.js" type="text/javascript" ></script>
+                <script src="./node_modules/angular-aria/angular-aria.js" type="text/javascript" ></script>
+                <script src="./node_modules/angular-material/angular-material.js" type="text/javascript" ></script>
+
+                <script src="node_modules/angular-route/angular-route.js"></script>
+
+                <script src="mainController.js"></script>
+                <link rel="stylesheet" type="text/css" href="main.css" />
+
+        </head>
+
+
+        <body>
+                What up!        
+                 <div ng-if = "!val">
+                        <p>yooooo</p>
+                 </div>
+                <button ng-click = "main.getUserList()"> get users {{users}} </button>
+                <div ng-repeat = "user in users">
+                        <!-- <li> <a ng-href = "#!users/{{user._id}}"> {{user.first_name + " " + user.last_name}} </a></li> -->
+                <button ng-click = "main.setUser(user)"> {{user.first_name + " " + user.last_name}} </button>
+                </div>
+                <p> user set to {{main.currentUser}}</p>
+                <button ng-click = "main.getPlaylists()"> get playlist</button>
+                <p>{{main.playlists}}</p>
+
+
+
+<div>
+        <h3> Playlists </h3>
+        <div ng-repeat = "playlist in main.playlists"> 
+        <button ng-click = "main.selectPlaylist(playlist)"> {{playlist.name}} </button>        
+        </div>
+        <p> {{main.currentPlaylistId}} </p>
+</div>
+
+
+<div>
+        <button ng-click = "main.getSongs()"> Get Songs </button>
+        <p>{{songs}}</p>
+</div>
+
+
+
+<div>
+        <button ng-click = "main.getTextObjs()"> Get TEXT OBJS </button>
+        <p> {{textObjs}}</p>
+</div>
+
+
+<div>
+        <h3> Songs in: {{main.currentPlaylistName}} </h3>
+        <div ng-repeat = "song_id in main.currentPlaylist.songs">
+                <button ng-click = removeSong(song_id)> Remove song {{song_id}} </button>
+        </div>
+</div>
+
+
+
+
+
+<div>
+        <h3> TextObjs in: {{main.currentPlaylistName}} </h3>
+        <div ng-repeat = "textObj_id in main.currentPlaylist.textObjs">
+                <button ng-click = "removeTextObj(textObj_id)"> Remove textObj {{textObj_id}} </button>
+                <button ng-click = "main.getSongFromTextObj(textObj_id)"> Retrieve Song from text {{songFromText}}</button>
+
+                <p> Edit textObj: {{textObj_id}} </p>
+                <form ng-submit = "editTextObj(textObj_id)"> 
+                        <div>
+                                <label> Text /Song description: </label>
+                                <input type="text" ng-model="main.one">
+                        </div>
+                        <div>
+                                <label> Song ISRC: </label>
+                                <input type="text" ng-model="main.two">
+                        </div>
+                        <input type="submit" value="Edit TextOb/Songdesc">
+
+                </form>
+
+        </div>
+</div>
+
+
+
+
+
+
+
+<div>
+        <h3> Add/Create Playlist</h3>
+        <form ng-submit = "createPlaylist()">
+        <div>
+                <label> Playlist name: </label>
+                <input type="text" ng-model="playlist_name" required>
+        </div>         
+
+        <div>
+                <label> Playlist description: </label>
+                <input type="text" ng-model="playlist_description">
+        </div>
+                <input type="submit" value="Add/Create Playlist">
+        </form>
+</div>
+
+
+<div>
+        <h3> Edit current playlist {{main.currentPlaylistId}} : </h3>
+        <form ng-submit = "editPlaylist(main.currentPlaylistId)">
+        <div>
+                <label> Playlist name: </label>
+                <input type="text" ng-model="editPlaylistName" required>
+        </div>         
+
+        <div>
+                <label> Playlist description: </label>
+                <input type="text" ng-model="editPlaylistDescription">
+        </div>
+
+
+                <input type="submit" value="Edit Playlist">     
+
+        </form>
+
+</div>
+
+
+
+
+<div>
+        <h3> Add song to: {{main.currentPlaylistName}}</h3>
+        <form ng-submit = "main.addSong()">
+                <div>
+                        <label> Song name: </label>
+                        <input type="text" ng-model="song_name">
+                </div>   
+
+                <div>
+                        <label> Song isrc: </label>
+                        <input type="text" ng-model="song_isrc">
+                </div>
+                <div>
+                        <label> Artist name: </label>
+                        <input type="text" ng-model="song_artist">
+                </div>
+
+                <div>
+                        <label> Album name: </label>
+                        <input type="text" ng-model="song_album">
+                </div>                
+
+                <div>
+                        <label> Song description: </label>
+                        <input type="text" ng-model="song_description">
+                </div>
+                <input type="submit" value="Add Song">
+        </form>
+</div>
+
+
+
+
+<div>
+         <h3> Add text blob to: {{main.currentPlaylistName}}</h3>
+         <form ng-submit = "main.addTextObj()">
+
+                 <div>
+                        <label> description: </label>
+                        <input type="text" ng-model="main.text">
+                </div>   
+
+                <div>
+                        <label> Song isrc: </label>
+                        <input type="text" ng-model="song_isrc1">
+                </div>
+                         
+                 <input type="submit" value="Add text + song to playlist">
+
+         </form>
+</div>
+
+
+<div>
+        <h3> Search for playlist by name</h3>
+        <form ng-submit = searchPlaylistNameFunc()> 
+                <div>
+                        <label> search for playlist with name: </label>
+                        <input type="text" ng-model="main.searchPlaylistName">
+                </div>
+                <input type="submit" value=" Search for playlist by name">
+        </form>
+        <p> {{main.playlistFoundByName}}</p>
+</div>
+
+
+<!-- <div>
+        <h3> Search for playlist by tag</h3>
+        <form ng-submit = searchPlaylistTagFunc()> 
+                <div>
+                        <label> search for playlist with tag: </label>
+                        <input type="text" ng-model="main.searchPlaylistTag">
+                </div>
+                <input type="submit" value=" Search for playlist by tag">
+        </form>
+        <p> {{main.playlistFoundByTag}}</p>
+</div> -->
+
+
+
+
+
+
+
+<div class= "register">
+        <h3> Registration Section</h3>
+        <form ng-submit="register()">
+        <div>
+                <label> Login name: </label>
+                <input type="text" ng-model = "reg_login_name" required>
+        </div>
+
+        <div>
+                <label> Password: </label>
+                <input type="password" ng-model = "password1" required>
+        </div>
+
+        <div>
+                <label> Retype Password: </label>
+                <input type="password" ng-model = "password2" required>
+        </div>
+        <div>
+
+                <label> First Name: </label>
+                <input type="text" ng-model = "first_name" required>
+        </div>
+        <div>
+                <label> Last Name: </label>
+                <input type="text" ng-model = "last_name" required>
+        </div>
+
+                <input type="submit" value = "Register Me"> 
+                <!-- <p ng-if= "invalidRegister"> Login Name Already Exists. Please use another one </p> -->
+        </form>
+</div>
+
+        </body>
+</html>
+
+
+
+
+
+
+
+
+
+<!-- <label> first_name <input type="text" name="first_name" ng-model = "first_name">
+</label>
+
+<label> last_name <input type="text" name="first_name" ng-model = "first_name">
+</label>
+
+
+<h3> {{first_name}}
+</h3> -->
