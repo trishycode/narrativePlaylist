@@ -192,13 +192,27 @@ app.get('/getSongFromTextObj', function (request, response) {
 
 
 
-app.get('/searchPlaylistbyname', function(request, response) {
-    console.log(request.body);
-    Playlist.find({name: request.body.name}, function (err, playlists) {
+app.post('/searchPlaylistbyname', function(request, response) {
+    console.log("HEREEEEEE: " + request.body.name);
+    Playlist.findOne({name: request.body.name}, function (err, playlists) {
         if(err) {
             response.status(400).send("error in search for playlist by name ");
         } else {
             response.status(200).send(playlists);
+        }
+    });
+});
+
+
+
+
+app.post('/searchSongbyname', function(request, response) {
+    console.log("HEREEEEEE: " + request.body.name);
+    Song.findOne({name: request.body.name}, function (err, songs) {
+        if(err) {
+            response.status(400).send("error in search for song by name ");
+        } else {
+            response.status(200).send(songs);
         }
     });
 });

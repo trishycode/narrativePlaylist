@@ -43,9 +43,19 @@
 </div>
 
 
+
 <div>
-        <button ng-click = "main.getSongs()"> Get Songs </button>
-        <p>{{songs}}</p>
+        <button ng-click = "main.getSongs()" ng-init = "clicked = true"> Get Songs </button>
+        <p>{{songs[0].src}}</p>
+
+
+        <span ng-if = "clicked" >
+        <iframe id="abc_iframe" src="" width="500" height="280" frameborder="0" allowtransparency="true"></iframe>
+
+        </span>
+
+
+
 </div>
 
 
@@ -191,7 +201,7 @@
 
 <div>
         <h3> Search for playlist by name</h3>
-        <form ng-submit = searchPlaylistNameFunc()> 
+        <form ng-submit = "main.searchPlaylistNameFunc(main.searchPlaylistName)"> 
                 <div>
                         <label> search for playlist with name: </label>
                         <input type="text" ng-model="main.searchPlaylistName">
@@ -200,6 +210,26 @@
         </form>
         <p> {{main.playlistFoundByName}}</p>
 </div>
+
+
+
+
+<div>
+        <h3> Search for song by name</h3>
+        <form ng-submit = "main.searchSongNameFunc(main.searchSongName)"> 
+                <div>
+                        <label> search for song with name: </label>
+                        <input type="text" ng-model="main.searchSongName">
+                </div>
+                <input type="submit" value=" Search for song by name">
+        </form>
+        <p> {{main.songFoundByName}}</p>
+</div>
+
+
+
+
+
 
 
 <!-- <div>

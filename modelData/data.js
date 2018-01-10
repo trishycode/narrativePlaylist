@@ -33,28 +33,116 @@ var mongoose = require('mongoose');
 
 
 	var song1 = {
-		_id:"57231f1a30e4351f4e9f4be9",
-		name: "Unforgettable",
+		_id:"1",
+		name: "unforgettable",
 		artist: "French Montana ft. Swae Lee",
 		album: "Jungle Rules",
 		description: "A younger one, but still an instant classic",
-		isrc: '57231f1a30e4351f4e9f4be9'
+		isrc: '57231f1a30e4351f4e9f4be9',
+		src: 'https://open.spotify.com/embed/track/3B54sVLJ402zGa6Xm4YGNe',
 		//playlist_id: [playlist2._id]
 	};
 
 
 	var song2 = {
-		_id: "57231f1a30e4351f4e9f4bea",
-		name: "Passionfruit",
+		_id: "2",
+		name: "passionfruit",
 		artist: "drake",
 		album: "More life",
 		description: "A classic chiller bean",
-		isrc: '57231f1a30e4351f4e9f4bea'
+		isrc:'57231f1a30e4351f4e9f4bea',
+		src: 'https://open.spotify.com/embed/track/5mCPDVBb16L4XQwDdbRUpz',
 		//playlist_id: [playlist1._id]
 	};
 
 
-	var songs = [song1, song2]
+	var song3 = {
+		name: "bounce back",
+		artist: "Big Sean",
+		album: "I Decided.",
+		description: "A younger one, but still an instant classic",
+		isrc: '57231f1a30e4351f4e9f4be9',
+		src: 'https://open.spotify.com/embed/track/0SGkqnVQo9KPytSri1H6cF',
+		//playlist_id: [playlist2._id]
+	};
+
+
+	var song4 = {
+		name: "started from the bottom",
+		artist: "drake",
+		album: "Nothing was the same",
+		description: "A classic chiller bean",
+		isrc:'57231f1a30e4351f4e9f4bea',
+		src: 'https://open.spotify.com/embed/track/6V2D8Lls36APk0THDjBDfE',
+		//playlist_id: [playlist1._id]
+	};
+
+
+	var song5 = {
+		name: "power trip",
+		artist: "J.Cole Ft. Miguel",
+		album: "Nothing was the same",
+		description: "A classic chiller bean",
+		isrc:'57231f1a30e4351f4e9f4bea',
+		src: 'https://open.spotify.com/embed/track/7FOJvA3PxiIU0DN3JjQ7jT',
+		//playlist_id: [playlist1._id]
+	};
+
+
+
+
+	var song6 = {
+		name: "instinct",
+		artist: "Roy Woods",
+		album: "Nocturnal",
+		description: "A classic chiller bean",
+		isrc:'57231f1a30e4351f4e9f4bea',
+		src: 'https://open.spotify.com/embed/track/49VzL5oBsUICN7U34T98b9',
+		//playlist_id: [playlist1._id]
+	};
+
+
+
+	var song7 = {
+		name: "",
+		artist: "",
+		album: "",
+		description: "A classic chiller bean",
+		isrc:'57231f1a30e4351f4e9f4bea',
+		src: '',
+		//playlist_id: [playlist1._id]
+	};
+
+
+
+
+	var song8 = {
+		name: "",
+		artist: "",
+		album: "",
+		description: "A classic chiller bean",
+		isrc:'57231f1a30e4351f4e9f4bea',
+		src: '',
+		//playlist_id: [playlist1._id]
+	};
+
+
+
+
+	var song9 = {
+		name: "",
+		artist: "",
+		album: "",
+		description: "A classic chiller bean",
+		isrc:'57231f1a30e4351f4e9f4bea',
+		src: '',
+		//playlist_id: [playlist1._id]
+	};
+
+
+
+
+	var songs = [song1, song2, song3, song4,]
 
 
 

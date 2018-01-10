@@ -86,7 +86,8 @@ var songPromises = songModels.map(function(song) {
         artist: song.artist,
         album: song.album,
         playlists: song.playlists,
-        isrc: song.isrc
+        isrc: song.isrc,
+        src:song.src,
     }, function(err, songObj){
         if(err) {
             console.log("error in song entry");

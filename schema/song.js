@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 
 var songSchema = new mongoose.Schema({
 	isrc: String,
+	src: String,
 	name: String,
 	artist: String,
 	album: String,

@@ -23,7 +23,7 @@ narrativePlaylist.controller('mainController', ['$scope','$resource','$location'
         $scope.main.playlists = "";
         $scope.first_name = "";
 
-
+        $scope.abc = "";
 
         $scope.login_name = "";
         $scope.invalidMsg = false;
@@ -66,9 +66,15 @@ narrativePlaylist.controller('mainController', ['$scope','$resource','$location'
         $scope.main.two = "";
         $scope.main.searchPlaylistName = "";
         $scope.main.searchPlaylistTag = "";
+        $scope.main.searchSongName = "";
+        $scope.main.searchSongTag = "";
+
+
 
         $scope.main.playlistFoundByName = "";
         $scope.main.playlistFoundByTag = "";
+        $scope.main.songFoundByName = "";
+        $scope.main.songFoundByTag = "";
 
 
 
@@ -123,10 +129,34 @@ narrativePlaylist.controller('mainController', ['$scope','$resource','$location'
             }
         });
 
+        // $scope.SearchPlaylistByName = $resource('/searchPlaylistbyname', {userId:'@id'}, {
+        //     get: {
+        //         method: 'get',
+        //         isArray: true
+        //         //data: {name:}
+        //         // headers: {
+        //         //     'Content-Type': 'application/json'
+        //         // }
+        //     }
+        // });
+
+
         $scope.SearchPlaylistByName = $resource('/searchPlaylistbyname', {userId:'@id'}, {
-            get: {
-                method: 'get',
-                isArray: true
+            post: {
+                method: 'post',
+                isArray: false
+                //data: {name:}
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // }
+            }
+        });
+
+
+         $scope.SearchSongByName = $resource('/searchSongbyname', {userId:'@id'}, {
+            post: {
+                method: 'post',
+                isArray: false
                 //data: {name:}
                 // headers: {
                 //     'Content-Type': 'application/json'
@@ -264,10 +294,23 @@ narrativePlaylist.controller('mainController', ['$scope','$resource','$location'
 	      };
 
 
-        $scope.searchPlaylistNameFunc = function() {
+        $scope.main.searchPlaylistNameFunc = function(playlistName) {
             var name =  $scope.main.searchPlaylistName;
-            $scope.SearchPlaylistByName.get({name: name}, function(model){
+            var name2 = $scope.main.searchPlaylistName;
+
+            $scope.SearchPlaylistByName.post({name: $scope.main.searchPlaylistName}, function(model){
                 $scope.main.playlistFoundByName = model;
+            });
+
+        };
+
+
+        $scope.main.searchSongNameFunc = function(playlistName) {
+            var name =  $scope.main.searchSongName;
+            var name2 = $scope.main.searchSongName;
+
+            $scope.SearchSongByName.post({name: $scope.main.searchSongName}, function(model){
+                $scope.main.songFoundByName = model;
             });
 
         };
@@ -307,6 +350,8 @@ narrativePlaylist.controller('mainController', ['$scope','$resource','$location'
           $scope.main.getSongs = function() {
             $scope.GetSongs.get(function(model){
                 $scope.songs = model;
+                $scope.abc = $scope.songs[2].src;
+                document.getElementById("abc_iframe").src = $scope.abc;
             });
           };
 
