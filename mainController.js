@@ -24,6 +24,9 @@ narrativePlaylist.controller('mainController', ['$scope','$resource','$location'
         $scope.first_name = "";
 
         $scope.abc = "";
+        $scope.abcd = "";
+
+
 
         $scope.login_name = "";
         $scope.invalidMsg = false;
@@ -67,6 +70,8 @@ narrativePlaylist.controller('mainController', ['$scope','$resource','$location'
         $scope.main.searchPlaylistName = "";
         $scope.main.searchPlaylistTag = "";
         $scope.main.searchSongName = "";
+        $scope.main.searchSongName1 = "";
+
         $scope.main.searchSongTag = "";
 
 
@@ -311,6 +316,9 @@ narrativePlaylist.controller('mainController', ['$scope','$resource','$location'
 
             $scope.SearchSongByName.post({name: $scope.main.searchSongName}, function(model){
                 $scope.main.songFoundByName = model;
+                $scope.aaa = $scope.songFoundByName.src;
+                document.getElementById("abcd_iframe").src = $scope.songFoundByName.src;
+
             });
 
         };
